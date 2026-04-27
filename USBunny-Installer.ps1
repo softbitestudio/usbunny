@@ -3,7 +3,7 @@
 .USBunny PORTABLE AI - Intelligent System Installer
 .DESCRIPTION
 Automatically detects system capabilities and recommends optimal AI models
-for your BunnyClaw portable USB drive. Supports uncensored and standard models.
+for your portable USB drive. Supports uncensored and standard models.
 #>
 
 $ErrorActionPreference = "Stop"
@@ -74,7 +74,7 @@ $ModelCatalog = @(
         Local    = "qwen-local"
         Label    = "STANDARD"
         Badge    = "MULTILINGUAL"
-        Prompt   = "You are Qwen, a helpful and harmless AI assistant created by Alibaba Cloud. Always answer as helpfully as possible. Bonus points for multilingual puns and Bunnyclaw energy!"
+        Prompt   = "You are Qwen, a helpful and harmless AI assistant created by Alibaba Cloud. Always answer as helpfully as possible. Bonus points for multilingual puns and Bunny energy!"
     },
     @{
         Num      = 5
@@ -88,7 +88,7 @@ $ModelCatalog = @(
         Local    = "llama3-local"
         Label    = "STANDARD"
         Badge    = "LIGHTWEIGHT"
-        Prompt   = "You are a helpful AI assistant. Keep it simple, smart, and sprinkle in some Bunnyclaw mischief!"
+        Prompt   = "You are a helpful AI assistant. Keep it simple, smart, and sprinkle in some Bunny mischief!"
     },
     @{
         Num      = 6
@@ -102,7 +102,7 @@ $ModelCatalog = @(
         Local    = "phi3-local"
         Label    = "STANDARD"
         Badge    = "LIGHTWEIGHT"
-        Prompt   = "You are a helpful AI assistant with expertise in reasoning and analysis. Think like a Bunny6: sharp, adaptable, and always ready for adventure!"
+        Prompt   = "You are a helpful AI assistant with expertise in reasoning and analysis. Think like a Bunny: sharp, adaptable, and always ready for adventure!"
     },
     @{
         Num      = 7
@@ -116,7 +116,7 @@ $ModelCatalog = @(
         Local    = "tinyllama-local"
         Label    = "UNCENSORED-ready"
         Badge    = "TINY"
-        Prompt   = "You are a simple AI chatbot. Keep it simple, smart, and sprinkle in some Bunnyclaw mischief!"
+        Prompt   = "You are a simple AI chatbot. Keep it simple, smart, and sprinkle in some Bunny mischief!"
     }
 )
 
@@ -227,7 +227,7 @@ function Show-SystemReport {
 # ================================================================
 function Test-InternetConnection {
     try {
-        $response = Invoke-WebRequest -Uri "https://www.google.com" -TimeoutSec 10
+        $response = Invoke-WebRequest -Uri "https://softbite.studio" -TimeoutSec 10
         return $true
     }
     catch {
