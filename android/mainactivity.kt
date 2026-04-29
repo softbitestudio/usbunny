@@ -105,3 +105,23 @@ fun BunnyclawTheme(content: @Composable () -> Unit) {
         content = content
     )
 }
+
+// bunny noises 
+private suspend fun copyAssetsToInternalStorage(context: Context) {
+    withContext(Dispatchers.IO) {
+        val assetManager = context.assets
+        val files = assetManager.list("") ?: return@withContext
+
+        for (file in files) {
+            val inputStream = assetManager.open(file)
+            val outputFile = File(context.filesDir, file)
+            inputStream.use { input ->
+                outputFile.outputStream().use { output ->
+                    input.copyTo(output)
+                }
+            }
+            // Make the file executable (important for bun.sh)
+            outputFile.setExecutable(true)
+        }
+    }
+}
