@@ -1,16 +1,16 @@
 <#
 .SYNOPSIS
-    Windows Repair & Malware Audit Script (Online + WinRE Offline)
+    Windows Repair & Malware Audit Script (Online + WinRE Offline) 🐾
 .DESCRIPTION
-    Normal Windows mode: Runs SFC/DISM repairs + deep malware-persistence audit.
-    WinRE mode: Performs offline SFC/DISM/chkdsk against an unbootable Windows install.
+    Normal Windows mode: Runs SFC/DISM repairs + deep malware-persistence audit (sniffing for bad mice).
+    WinRE mode: Performs offline SFC/DISM/chkdsk against an unbootable Windows install (emergency bunny medic).
 .NOTES
     Run as Administrator (normal Windows) or from WinRE Command Prompt.
-    Malware hooks are AUDIT-ONLY. They flag artifacts for review but do not auto-remediate.
+    Malware hooks are AUDIT-ONLY. They flag artifacts for review but do not auto-remediate. *purrs*
 #>
-⁰
+
 #Requires -RunAsAdministrator
-⁰00
+
 #region Environment Detection & Config x
 function Test-WinRE {
     if ($env:SystemDrive -eq "X:") { return $true }
@@ -19,8 +19,7 @@ function Test-WinRE {
     return $false
 }
 
-$inWinRE   = Test-
-}
+$inWinRE = Test-WinRE
 $ScriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { (Get-Location).ProviderPath }
 $LogDir    = if ($inWinRE) { "$ScriptDir\RepairLogs" } else { "$env:SystemDrive\RepairLogs" }
 $LogFile   = "$LogDir\Repair_$(Get-Date -Format 'yyyyMMdd_HHmmss').log"
@@ -55,13 +54,13 @@ function Add-Finding {
 
 function Invoke-WithLog {
     param([string]$Description, [scriptblock]$Action)
-    Write-Log "START: $Description"
+    Write-Log "START: $Description *twitching nose*"
     try {
         $result = & $Action
-        Write-Log "SUCCESS: $Description" "SUCCESS"
+        Write-Log "SUCCESS: $Description *happy hops*" "SUCCESS"
         return $result
     } catch {
-        Write-Log "ERROR: $Description - $($_.Exception.Message)" "ERROR"
+        Write-Log "ERROR: $Description - $($_.Exception.Message) *hisses*" "ERROR"
     }
 }
 
@@ -73,10 +72,10 @@ function Select-OfflineWindows {
             $targets += "$($v):"
         }
     }
-    if ($targets.Count -eq 0) { Write-Log "No Windows installations found." "ERROR"; return $null }
-    Write-Host "`nDetected Windows installations:" -ForegroundColor Cyan
+    if ($targets.Count -eq 0) { Write-Log "No Windows installations found... *sad meow*" "ERROR"; return $null }
+    Write-Host "`nDetected Windows installations (found the cozy spots!):" -ForegroundColor Cyan
     for ($i = 0; $i -lt $targets.Count; $i++) { Write-Host "  [$i] $($targets[$i])\Windows" }
-    $sel = Read-Host "Select target by number"
+    $sel = Read-Host "Select target by number, meow"
     if ($sel -match '^\d+$' -and [int]$sel -lt $targets.Count) { return $targets[[int]$sel] }
     return $null
 }
@@ -155,9 +154,11 @@ function Test-NetworkConnections {
         $_.LocalAddress -notmatch '^127\.' -and $_.LocalAddress -notmatch '^::1'
     } | ForEach-Object {
         $proc = Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue
-        $path = $proc.Path
-        if (($path -match '\\users\\') -and ($_.RemotePort -notin @(80,443,8080,993,995,587,465))) {
-            Add-Finding "Suspicious Network" "$($proc.ProcessName) (PID $($_.OwningProcess)) -> $($_.RemoteAddress):$($_.RemotePort) [$path]"
+        if ($proc) {
+            $path = $proc.Path
+            if (($path -match '\\users\\') -and ($_.RemotePort -notin @(80,443,8080,993,995,587,465))) {
+                Add-Finding "Suspicious Network" "$($proc.ProcessName) (PID $($_.OwningProcess)) -> $($_.RemoteAddress):$($_.RemotePort) [$path]"
+            }
         }
     }
 }
@@ -174,7 +175,7 @@ function Test-DNSCache {
 function Test-DefenderStatus {
     try {
         $mp = Get-MpPreference -ErrorAction Stop
-        if ($mp.DisableRealtimeMonitoring)     { Add-Finding "Defender" "Real-time protection DISABLED" }
+        if ($mp.DisableRealtimeMonitoring)     { Add-Finding "Defender" "Real-time protection DISABLED (*scared squeak*)" }
         if ($mp.DisableBehaviorMonitoring)     { Add-Finding "Defender" "Behavior monitoring DISABLED" }
         if ($mp.DisableScriptScanning)         { Add-Finding "Defender" "Script scanning DISABLED" }
         if ($mp.ExclusionPath.Count -gt 0)     { Add-Finding "Defender" "Exclusions: $($mp.ExclusionPath -join ', ')" }
@@ -184,7 +185,7 @@ function Test-DefenderStatus {
 function Test-FirewallStatus {
     try {
         Get-NetFirewallProfile -ErrorAction Stop | Where-Object { $_.Enabled -eq 'False' } | ForEach-Object {
-            Add-Finding "Firewall" "$($_.Name) profile is DISABLED"
+            Add-Finding "Firewall" "$($_.Name) profile is DISABLED (doors are wide open owo)"
         }
     } catch { Write-Log "Firewall check skipped." "WARN" }
 }
@@ -203,7 +204,7 @@ function Test-PolicyRestrictions {
     foreach ($p in $paths) {
         if (-not (Test-Path $p)) { continue }
         $props = Get-ItemProperty $p
-        if ($props.DisableTaskMgr)        { Add-Finding "Policy" "Task Manager disabled at $p" }
+        if ($props.DisableTaskMgr)        { Add-Finding "Policy" "Task Manager disabled at $p (they hid the task manager! nya!)" }
         if ($props.DisableRegistryTools)  { Add-Finding "Policy" "Registry Editor disabled at $p" }
     }
 }
@@ -211,7 +212,7 @@ function Test-PolicyRestrictions {
 function Test-ShadowCopies {
     $vss = Get-CimInstance Win32_ShadowCopy -ErrorAction SilentlyContinue
     if ($vss.Count -eq 0) {
-        Add-Finding "VSS" "No Shadow Copies / Restore Points found. May have been wiped by malware, uwu."
+        Add-Finding "VSS" "No Shadow Copies / Restore Points found. Malware might have eaten them, uwu."
     }
 }
 
@@ -226,7 +227,7 @@ function Test-LocalAdmins {
 }
 
 function Invoke-MalwareAudit {
-    Write-Host "`n=== MALWARE PERSISTENCE AUDIT ===" -ForegroundColor Magenta
+    Write-Host "`n=== MALWARE PERSISTENCE AUDIT (sniffing for bad mice) ===" -ForegroundColor Magenta
     Invoke-WithLog "Malware Audit" {
         Test-MalwareHosts
         Test-RunKeys
@@ -243,13 +244,13 @@ function Invoke-MalwareAudit {
         Test-LocalAdmins
 
         if ($script:SuspiciousFindings.Count -eq 0) {
-            Write-Log "No obvious suspicious artifacts detected." "SUCCESS"
+            Write-Log "No obvious suspicious artifacts detected! Clean as a whistle! ✧˖°" "SUCCESS"
         } else {
-            Write-Host "`n[!] $($script:SuspiciousFindings.Count) suspicious findings:" -ForegroundColor Red
+            Write-Host "`n[!] Oh no! $($script:SuspiciousFindings.Count) suspicious findings detected:" -ForegroundColor Red
             $script:SuspiciousFindings | Format-Table -AutoSize | Out-Host
             $csv = "$LogDir\MalwareAudit_$(Get-Date -Format 'yyyyMMdd_HHmmss').csv"
             $script:SuspiciousFindings | Export-Csv -Path $csv -NoTypeInformation
-            Write-Log "Findings exported: $csv" "ALERT"
+            Write-Log "Findings exported for review: $csv" "ALERT"
         }
     }
 }
@@ -257,7 +258,7 @@ function Invoke-MalwareAudit {
 
 #region Online Repair
 function Invoke-OnlineRepair {
-    Write-Host "`n=== ONLINE SYSTEM REPAIR ===" -ForegroundColor Cyan
+    Write-Host "`n=== ONLINE SYSTEM REPAIR (giving PC a bath) ===" -ForegroundColor Cyan
 
     Invoke-WithLog "SFC /scannow" {
         $proc = Start-Process sfc.exe -ArgumentList "/scannow" -Wait -PassThru -NoNewWindow
@@ -268,7 +269,7 @@ function Invoke-OnlineRepair {
     Invoke-WithLog "DISM ScanHealth"  { DISM /Online /Cleanup-Image /ScanHealth | Out-String }
     Invoke-WithLog "DISM RestoreHealth"{ DISM /Online /Cleanup-Image /RestoreHealth | Out-String }
 
-    if ((Read-Host "`nRun DISM Component Cleanup? (y/N)") -match '^[Yy]') {
+    if ((Read-Host "`nRun DISM Component Cleanup to free up space? (y/N)") -match '^[Yy]') {
         Invoke-WithLog "DISM StartComponentCleanup" { DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase | Out-String }
     }
 
@@ -279,6 +280,7 @@ function Invoke-OnlineRepair {
     if ((Read-Host "Reset Windows Update components? (y/N)") -match '^[Yy]') {
         Invoke-WithLog "WU Reset" {
             Stop-Service wuauserv, cryptSvc, bits, msiserver -Force -ErrorAction SilentlyContinue
+            Start-Sleep -Seconds 3 # Let the file locks release *purrs*
             @("$env:SystemRoot\SoftwareDistribution","$env:SystemRoot\System32\catroot2") | ForEach-Object {
                 if (Test-Path $_) { Rename-Item $_ "$_.old" -Force -ErrorAction SilentlyContinue }
             }
@@ -298,15 +300,15 @@ function Invoke-OnlineRepair {
 
 #region Offline WinRE Repair
 function Invoke-OfflineRepair {
-    Write-Host "`n=== WINRE OFFLINE REPAIR ===" -ForegroundColor Cyan
+    Write-Host "`n=== WINRE OFFLINE REPAIR (emergency bunny medic) ===" -ForegroundColor Cyan
     Write-Log "Running in Windows Recovery Environment"
 
     $target = Select-OfflineWindows
     if (-not $target) { return }
-    Write-Log "Target volume: $target"
+    Write-Log "Target volume found! *happy hops*: $target"
 
     Invoke-WithLog "Offline SFC" {
-        sfc /scannow /offbootdir=$target /offwindir=$target\Windows | Out-String
+        sfc /scannow /offbootdir=$target\ /offwindir=$target\Windows | Out-String
     }
 
     Invoke-WithLog "Offline DISM RestoreHealth" {
@@ -315,9 +317,6 @@ function Invoke-OfflineRepair {
     Invoke-WithLog "Offline DISM CheckHealth" {
         DISM /Image:$target /Cleanup-Image /CheckHealth | Out-String
     }
-
-    # Optional: if DISM fails, user can provide install.wim source:
-    # DISM /Image:$target /Cleanup-Image /RestoreHealth /Source:WIM:E:\sources\install.wim:1 /LimitAccess
 
     if ((Read-Host "`nRun chkdsk on $target now? (y/N)") -match '^[Yy]') {
         Invoke-WithLog "Offline chkdsk" { chkdsk "$target" /f /r | Out-String }
@@ -329,10 +328,10 @@ function Invoke-OfflineRepair {
 
 #region Main
 Clear-Host
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "  WINDOWS REPAIR & MALWARE AUDIT" -ForegroundColor Cyan
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Log "Environment: $(if($inWinRE){'WinRE'}else{'Normal Windows'})"
+Write-Host "(=^･ω･^=)================================(ᐢ⑅ᐢ)" -ForegroundColor Cyan
+Write-Host "     WINDOWS REPAIR & MALWARE AUDIT NYA~" -ForegroundColor Cyan
+Write-Host "=============================================" -ForegroundColor Cyan
+Write-Log "Environment: $(if($inWinRE){'WinRE (Offline Medic)'}else{'Normal Windows (Online)'})"
 Write-Log "Log path: $LogFile"
 
 if ($inWinRE) {
@@ -340,23 +339,23 @@ if ($inWinRE) {
 } else {
     Write-Host "`nSelect mode:" -ForegroundColor Cyan
     Write-Host "  [1] Full Repair + Malware Audit (Recommended) uwu"
-    Write-Host "  [2] Malware Audit Only"
-    Write-Host "  [3] System Repair Only"
+    Write-Host "  [2] Malware Audit Only (Just sniffing around)"
+    Write-Host "  [3] System Repair Only (Just the bath)"
     switch (Read-Host "`nSelection") {
         '1' { Invoke-MalwareAudit; Invoke-OnlineRepair }
         '2' { Invoke-MalwareAudit }
         '3' { Invoke-OnlineRepair }
-        default { Write-Log "Invalid selection." "ERROR"; exit 1 }
+        default { Write-Log "Invalid selection. *sad meow*" "ERROR"; exit 1 }
     }
 
     $needsReboot = (Test-Path "$env:SystemRoot\WinSxS\pending.xml") -or
                    (Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager" -Name PendingFileRenameOperations -ErrorAction SilentlyContinue)
     if ($needsReboot -or $script:SuspiciousFindings.Count -gt 0) {
-        Write-Warning "`nA reboot is recommended Meow."
+        Write-Warning "`nA reboot is highly recommended Meow."
         if ((Read-Host "Reboot now? Nyah~♪ (y/N)") -match '^[Yy]') { Restart-Computer -Force }
     }
 }
 
-Write-Host "`nDone. Press Enter to exit." -ForegroundColor Green
+Write-Host "`nAll done! Press Enter to exit and take a nap. ( ˶ˆ꒳ˆ˵ )" -ForegroundColor Green
 Read-Host
 #endregion
