@@ -20,6 +20,10 @@ The installer will access your machine before offering the optimal fit.
 
 **FULLY OFFLINE**
     _I will include 2 models on the USB:_
+|meaning you will need to purchase the USB from softbite.studio if you're interested. 
+I'm currently not listing any so if you're interested shot me a message and I'll make you one for 30 USD- this covers shipping- |
+ 
+ mailto:`bunrec@softbite.studio`
 
 • ONE TINY LLM guaranteed to work on most machines 
 
@@ -27,15 +31,11 @@ The installer will access your machine before offering the optimal fit.
 
 
 
-__Future Growth__
-The roadmap will include the ESP32-S3-Touch-LCD 
-The logical next step for making the AI feel "alive". By acting as an *esp-llm-bridge*, the stick becomes more than storage—it becomes the brain for an interactive sprite that can be "tickled or annoyed" in real-time.
-
-I'm going to write a pain-free script for non-technical users
-
-
-#!/bin/bash
 
 # Spin up the backend
+| ⚠️ **#!/bin/bash** |
+|----------------|
+| `docker run -d --gpus all -v ollama:/root/.ollama -p 11434:11434 ollama/ollama`|
 
-docker run -d --gpus all -v ollama:/root/.ollama -p 11434:11434 ollama/ollama
+
+
