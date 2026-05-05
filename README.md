@@ -40,14 +40,16 @@ Each USB includes **two pre-loaded models** (purchase required from [softbite.st
 - **🏢 ONE MID-SIZED LLM** – Fits commercial standards.
 
 > **💰 Pricing:** $30 USD (includes shipping).
-> **📩 Interested?** [Message me](mailto:bunrec@softbite.studio) to order.
+> **📩 Interested?** [Message me at bunrec@softbite.studio](mailto:bunrec@softbite.studio) to order.
 
 ---
 
 ## 🚀 Spin Up the Backend
 
 ### For Users **Without the USB**:
+
 Run Ollama locally with Docker (models will be stored on your machine):
+
 ```bash
 docker run -d --gpus all -v ollama_data:/root/.ollama -p 11434:11434 ollama/ollama
 `
@@ -56,6 +58,8 @@ docker run -d --gpus all -v ollama_data:/root/.ollama -p 11434:11434 ollama/olla
 ### For Users **With the USB**:
 
 The installer will **automatically detect your machine** and offer the optimal setup.
+ 
+if it doesn't **autorun**
 
 > **To install:**
 > Right-click **`start-(your_OS)[.bat | .command]`** and select **"Run as Administrator"** (or equivalent).
