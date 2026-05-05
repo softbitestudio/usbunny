@@ -29,7 +29,9 @@ By packing a full LLM stack onto a single drive, it turns any workstation into a
 The installer will **automatically detect your machine** and offer the optimal setup.
 
 > **To install:**
-> Right-click **`start-(your_OS)[.bat | .command]`** and select **"Run as Administrator"** (or equivalent).
+> Right-click **`start-(your_OS)`**
+ and select 
+**"Run as Administrator"**
 
 ---
 
