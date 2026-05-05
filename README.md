@@ -46,8 +46,25 @@ Each USB includes **two pre-loaded models** (purchase required from [softbite.st
 
 ## 🚀 Spin Up the Backend
 
-Run the following command to start the backend:
-
+### For Users **Without the USB**:
+Run Ollama locally with Docker (models will be stored on your machine):
 ```bash
-docker run -d --gpus all -v ollama:/root/.ollama -p 11434:11434 ollama/ollama
+docker run -d --gpus all -v ollama_data:/root/.ollama -p 11434:11434 ollama/ollama
+`
+
+
+### For Users **With the USB**:
+1. Mount the USB (e.g., to `/mnt/usb`).
+2. Run Ollama with the USB as storage:
+```bash
+docker run -d --gpus all -v /mnt/usb/ollama:/root/.ollama -p 11434:11434 ollama/ollama
 ```
+```
+
+---
+### **Notes for Non-Technical Users**
+- **Docker Required**: They’ll need to [install Docker](https://docs.docker.com/get-docker/) first.
+- **GPU Optional**: If they don’t have a GPU, remove `--gpus all` (but expect slower performance).
+- **First-Time Setup**: After running the container, they’ll need to pull a model (e.g., `docker exec -it <container_id> ollama pull llama2`).
+
+---
