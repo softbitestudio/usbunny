@@ -1,41 +1,53 @@
-🐇🔌 USBunny 🍡 Ai On A Stick
+# 🐇🔌 USBunny 🍡 AI On A Stick
 
- "Raw. Local. Unfiltered."
+*"Raw. Local. Unfiltered."*
 
-**USBunny** is a plug-and-play environment for those who want their AI like they want their food:
-* locally grown, untampered with, and free of corporate additives.*
- By packing a full LLM stack onto a single drive, it turns any workstation into a private, agentic powerhouse.
+---
 
+**USBunny** is a **plug-and-play AI environment** for those who want their AI like their food:
+**Locally grown, untampered with, and free of corporate additives.**
+By packing a full LLM stack onto a single drive, it turns any workstation into a **private, agentic powerhouse**.
 
-**Data Sovereignty**: Your weights, your drives, your data. No cloud harvesting.
+---
 
-*Uncensored by Design*: No corporate "safety-washing." 
-Just raw compute for distinctive narratives.
+## ✨ Core Principles
 
-*Hardware Agnostic*: Designed to bridge the gap between heavy local LLMs, Windows, Mac, and interactive sprites on hardware like the ESP32 or Raspberry Pi.
-For high RAM and low. 
+- **🔒 Data Sovereignty**
+  Your weights, your drives, your data. **No cloud harvesting.**
 
-**ONE TIME INSTALL OR…**
-The installer will access your machine before offering the optimal fit.
+- **🚫 Uncensored by Design**
+  No corporate "safety-washing." Just raw compute for **distinctive narratives.**
 
-**FULLY OFFLINE**
-    _I will include 2 models on the USB:_
-|meaning you will need to purchase the USB from softbite.studio if you're interested. 
-I'm currently not listing any so if you're interested shot me a message and I'll make you one for 30 USD- this covers shipping- |
- 
- mailto:`bunrec@softbite.studio`
+- **🖥️ Hardware Agnostic**
+  Designed to bridge the gap between **heavy local LLMs, Windows, Mac, and interactive sprites** on hardware like the **ESP32 or Raspberry Pi.**
+  Works for **high RAM and low.**
 
-• ONE TINY LLM guaranteed to work on most machines 
+---
 
-• & A MID-SIZED LLM fitting the commercial standard. 
+## 📦 One-Time Install
 
+The installer will **automatically detect your machine** and offer the optimal setup.
 
+> **To install:**
+> Right-click **`start-(your_OS)[.bat | .command]`** and select **"Run as Administrator"** (or equivalent).
 
+---
 
-# Spin up the backend
-| ⚠️ **#!/bin/bash** |
-|----------------|
-| `docker run -d --gpus all -v ollama:/root/.ollama -p 11434:11434 ollama/ollama`|
+## 🌐 Fully Offline
 
+Each USB includes **two pre-loaded models** (purchase required from [softbite.studio](mailto:bunrec@softbite.studio)):
+- **🪲 ONE TINY LLM** – Guaranteed to work on most machines.
+- **🏢 ONE MID-SIZED LLM** – Fits commercial standards.
 
+> **💰 Pricing:** $30 USD (includes shipping).
+> **📩 Interested?** [Message me](mailto:bunrec@softbite.studio) to order.
 
+---
+
+## 🚀 Spin Up the Backend
+
+Run the following command to start the backend:
+
+```bash
+docker run -d --gpus all -v ollama:/root/.ollama -p 11434:11434 ollama/ollama
+```
