@@ -2,6 +2,8 @@
 
 *"Raw. Local. Unfiltered."*
 
+how to install: download the zip file to a USB (recommend 3.0 & higher) flash/thumb drive with *at least* 16GB free space, then click 
+
 ---
 
 **USBunny** is a **plug-and-play AI environment** for those who want their AI like their food:
@@ -13,14 +15,29 @@ By packing a full LLM stack onto a single drive, it turns any workstation into a
 ## ✨ Core Principles
 
 - **🔒 Data Sovereignty**
-  Your weights, your drives, your data. **No cloud harvesting.**
+  Your weights, your drives, your data.
+ **No cloud harvesting.**
 
 - **🚫 Uncensored by Design**
-  No corporate "safety-washing." Just raw compute for **distinctive narratives.**
+  No corporate "safety-washing." 
+Just raw compute for **distinct narratives.**
 
 - **🖥️ Hardware Agnostic**
-  Designed to bridge the gap between **heavy local LLMs, Windows, Mac, and interactive sprites** on hardware like the **ESP32 or Raspberry Pi.**
+  Designed to bridge the gap between **heavy local LLMs, Windows, Mac, Linux. 
   Works for **high RAM and low.**
+simply choose less parameters for less RAM 
+the more 🐏 you have, the now parameters your machine can handle! 
+
+| RAM Size | Max Model Parameters (4-bit) | Example Models |
+| :--- | :--- | :--- |
+| **0 - 4 GB** | **< 1B** | Phi-2, Qwen-0.5B, TinyLlama |
+| **8 GB** | **3B** | Llama 3.2 3B, Phi-3.5 Mini |
+| **16 GB** | **8B** | Llama 3.1 8B, Mistral 7B |
+| **24 GB** | **14B** | Qwen 2.5 14B, Mistral NeMo 12B |
+| **32 GB** | **27B - 32B** | Gemma 2 27B, Qwen 2.5 32B |
+| **48 GB** | **40B - 50B** | Mixtral 8x7B, Command R 35B |
+| **64 GB+** | **70B+** | Llama 3.3 70B, Qwen 2.5 72B |
+
 
 ---
 
@@ -35,15 +52,7 @@ The installer will **automatically detect your machine** and offer the optimal s
 
 ---
 
-## 🌐 Fully Offline
-
-Each USB includes **two pre-loaded models** (purchase required from [softbite.studio](mailto:bunrec@softbite.studio)):
-- **🪲 ONE TINY LLM** – Guaranteed to work on most machines.
-- **🏢 ONE MID-SIZED LLM** – Fits commercial standards.
-
-> **💰 Pricing:** $30 USD (includes shipping).
-> **📩 Interested?** [Message me at bunrec@softbite.studio](mailto:bunrec@softbite.studio) to order.
-
+## 🌐 Your Conversation Stays on your machine.
 ---
 
 ## 🚀 Spin Up the Backend
@@ -60,12 +69,12 @@ docker run -d --gpus all -v ollama_data:/root/.ollama -p 11434:11434 ollama/olla
 ## 
 The installer will **automatically detect your machine** and offer the optimal setup.
  
-|⭐ For Users **With the USB**:
+|⭐  **With the USB**:
    |
 |----------------|
 | 
     • plug in USBunny 
-+ open folders of it doesn't automatically
++ open folders if it doesn't automatically
     • Choose OS (windows, mac) 
     • START
 |
@@ -96,17 +105,17 @@ curl -fsSL https://ollama.com/install.sh | sh
 ### 2. Start the Ollama Server
 ```bash
 ollama serve
-```
+`
 
 ### 3. Pull a Model
 ```bash
 ollama pull llama2       # Replace with mistral, phi, etc.
-```
+`
 
 ### 4. Run the Model
 ```bash
 ollama run llama2
-```
+`
 
 > **💡 GPU Support**: Ollama automatically uses your NVIDIA GPU if available. No extra steps needed!
 
