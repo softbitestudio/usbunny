@@ -73,17 +73,18 @@ docker run -d --gpus all -v ollama_data:/root/.ollama -p 11434:11434 ollama/olla
 
 ## 
 The installer will **automatically detect your machine** and offer the optimal setup.
- 
-|⭐  **With the USB**:
+ ---
+|⭐  **With the USB**:|
    
 |----------------|
 
-    • plug in USBunny 
+|    • plug in USBunny 
 + open folders if it doesn't automatically
     • Choose OS (windows, mac) 
     • START
 
 |
+---
 
 
 
@@ -96,7 +97,7 @@ The installer will **automatically detect your machine** and offer the optimal s
 - **Ubuntu 20.04/22.04+** (or compatible Linux distro).
 - **Internet connection** (to download models).
 - **Optional**: NVIDIA GPU with CUDA drivers for faster performance.
-if you have no GPU, look into [BitNet.ai](https://bitnet.ai)
+if you have no GPU, look into [BitNet.ai](https://github.com/microsoft/BitNet)
 ---
 
 ## 🛠️ Option 1: Ollama (Easiest)
