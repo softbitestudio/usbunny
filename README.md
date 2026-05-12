@@ -2,8 +2,6 @@
 
 *"Raw. Local. Unfiltered."*
 
-how to install: download the zip file to a USB (recommend 3.0 & higher) flash/thumb drive with *at least* 16GB free space, then click 
-
 ---
 
 **USBunny** is a **plug-and-play AI environment** for those who want their AI like their food:
@@ -11,6 +9,12 @@ how to install: download the zip file to a USB (recommend 3.0 & higher) flash/th
 By packing a full LLM stack onto a single drive, it turns any workstation into a **private, agentic powerhouse**.
 
 ---
+how to install: download the zip file to a USB (recommend 3.0 & higher) flash/thumb drive with *at least* 16GB free space, then 
+> Right-click **`start-(your_OS)`**
+ and select 
+**"Run as Administrator"**
+
+***USBunny will hop to it, diagnosing your machine, and choosing a suitable LLM.*** 
 
 ## ✨ Core Principles
 
@@ -26,7 +30,8 @@ Just raw compute for **distinct narratives.**
   Designed to bridge the gap between **heavy local LLMs, Windows, Mac, Linux. 
   Works for **high RAM and low.**
 simply choose less parameters for less RAM 
-the more 🐏 you have, the now parameters your machine can handle! 
+the more 🐏 you have, the more parameters your machine can handle! 
+---
 
 | RAM Size | Max Model Parameters (4-bit) | Example Models |
 | :--- | :--- | :--- |
@@ -70,13 +75,14 @@ docker run -d --gpus all -v ollama_data:/root/.ollama -p 11434:11434 ollama/olla
 The installer will **automatically detect your machine** and offer the optimal setup.
  
 |⭐  **With the USB**:
-   |
+   
 |----------------|
-| 
+
     • plug in USBunny 
 + open folders if it doesn't automatically
     • Choose OS (windows, mac) 
     • START
+
 |
 
 
@@ -86,12 +92,11 @@ The installer will **automatically detect your machine** and offer the optimal s
 *No cloud. No tracking. Just your machine and the model.*
 
 ---
-
 ## 📌 Prerequisites
 - **Ubuntu 20.04/22.04+** (or compatible Linux distro).
 - **Internet connection** (to download models).
 - **Optional**: NVIDIA GPU with CUDA drivers for faster performance.
-
+if you have no GPU, look into [BitNet.ai](https://bitnet.ai)
 ---
 
 ## 🛠️ Option 1: Ollama (Easiest)
