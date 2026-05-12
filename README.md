@@ -1,232 +1,121 @@
-# 🐇🔌 USBunny 🍡 AI On A Stick
+# 🐇🔌 USBunny — AI On A Stick
 
 *"Raw. Local. Unfiltered."*
 
----
-
-**USBunny** is a **plug-and-play AI environment** for those who want their AI like their food:
-**Locally grown, untampered with, and free of corporate additives.**
-By packing a full LLM stack onto a single drive, it turns any workstation into a **private, agentic powerhouse**.
+**USBunny** is a plug-and-play AI environment that packs a full LLM stack onto a single USB drive, turning any workstation into a **private, agentic powerhouse** — no cloud required.
 
 ---
-how to install: download the zip file to a USB (recommend 3.0 & higher) flash/thumb drive with *at least* 16GB free space, then 
-> Right-click **`start-(your_OS)`**
- and select 
-**"Run as Administrator"**
-
-***USBunny will hop to it, diagnosing your machine, and choosing a suitable LLM.*** 
 
 ## ✨ Core Principles
 
-- **🔒 Data Sovereignty**
-  Your weights, your drives, your data.
- **No cloud harvesting.**
-
-- **🚫 Uncensored by Design**
-  No corporate "safety-washing." 
-Just raw compute for **distinct narratives.**
-
-- **🖥️ Hardware Agnostic**
-  Designed to bridge the gap between **heavy local LLMs, Windows, Mac, Linux. 
-  Works for **high RAM and low.**
-simply choose less parameters for less RAM 
-the more 🐏 you have, the more parameters your machine can handle! 
----
-
-| RAM Size | Max Model Parameters (4-bit) | Example Models |
-| :--- | :--- | :--- |
-| **0 - 4 GB** | **< 1B** | Phi-2, Qwen-0.5B, TinyLlama |
-| **8 GB** | **3B** | Llama 3.2 3B, Phi-3.5 Mini |
-| **16 GB** | **8B** | Llama 3.1 8B, Mistral 7B |
-| **24 GB** | **14B** | Qwen 2.5 14B, Mistral NeMo 12B |
-| **32 GB** | **27B - 32B** | Gemma 2 27B, Qwen 2.5 32B |
-| **48 GB** | **40B - 50B** | Mixtral 8x7B, Command R 35B |
-| **64 GB+** | **70B+** | Llama 3.3 70B, Qwen 2.5 72B |
-
+- **🔒 Data Sovereignty** — Your weights, your drives, your data. No cloud harvesting.
+- **🚫 Uncensored by Design** — No corporate safety-washing. Raw compute for distinct narratives.
+- **🖥️ Hardware Agnostic** — Works on Windows, Mac, and Linux, across high and low RAM machines.
 
 ---
 
-## 📦 One-Time Install
+## 🚀 Quick Start (With USB)
 
-The installer will **automatically detect your machine** and offer the optimal setup.
+1. Download the zip file to a USB 3.0+ flash drive with **at least 16 GB free**.
+2. Open the drive folder.
+3. **Right-click `start-(your_OS)`** and select **"Run as Administrator"**.
 
-> **To install:**
-> Right-click **`start-(your_OS)`**
- and select 
-**"Run as Administrator"**
+USBunny will automatically diagnose your machine and select a suitable model.
 
----
-
-## 🌐 Your Conversation Stays on your machine.
----
-
-## 🚀 Spin Up the Backend
-
-For Users **Without the USB**:
-
-Run Ollama locally with Docker (models will be stored on your machine):
-
-```bash
-docker run -d --gpus all -v ollama_data:/root/.ollama -p 11434:11434 ollama/ollama
-```
-
-
-## 
-The installer will **automatically detect your machine** and offer the optimal setup.
- ---
-|⭐  **With the USB**:|
-   
-|----------------|
-
-|    • plug in USBunny 
-+ open folders if it doesn't automatically
-    • Choose OS (windows, mac) 
-    • START
-
-|
----
-
-
-
-# 🐧 Running Local AI on Linux (Ubuntu)
-
-*No cloud. No tracking. Just your machine and the model.*
-
----
-## 📌 Prerequisites
-- **Ubuntu 20.04/22.04+** (or compatible Linux distro).
-- **Internet connection** (to download models).
-- **Optional**: NVIDIA GPU with CUDA drivers for faster performance.
-if you have no GPU, look into [BitNet.ai](https://github.com/microsoft/BitNet)
----
-
-## 🛠️ Option 1: Ollama (Easiest)
-Ollama is the simplest way to run LLMs locally.
-
-### 1. Install Ollama
-```bash
-curl -fsSL https://ollama.com/install.sh | sh
-```
-
-### 2. Start the Ollama Server
-```bash
-ollama serve
-`
-
-### 3. Pull a Model
-```bash
-ollama pull llama2       # Replace with mistral, phi, etc.
-`
-
-### 4. Run the Model
-```bash
-ollama run llama2
-`
-
-> **💡 GPU Support**: Ollama automatically uses your NVIDIA GPU if available. No extra steps needed!
-
----
-
-## 🐳 Option 2: Ollama with Docker (Isolated)
-For users who prefer Docker.
-
-### 1. Install Docker
-```bash
-sudo apt update && sudo apt install -y docker.io
-sudo systemctl enable --now docker
-sudo usermod -aG docker $USER
-newgrp docker  # Refresh permissions
-```
-
-### 2. Run Ollama in Docker
-```bash
-docker run -d --gpus all -v ollama_data:/root/.ollama -p 11434:11434 ollama/ollama
-```
-- `--gpus all`: Enable GPU (remove if no GPU).
-- `-v ollama_data:/root/.ollama`: Persist models on your machine.
-- `-p 11434:11434`: Expose the Ollama API port.
-
-### 3. Pull and Run a Model
-```bash
-docker exec -it <container_id> ollama pull llama2
-docker exec -it <container_id> ollama run llama2
-```
-> Replace `<container_id>` with your container’s ID (find it with `docker ps`).
-
----
-
-## 🔧 Option 3: `llama.cpp` (Advanced)
-For full control over models and quantization.
-
-### 1. Install Dependencies
-```bash
-sudo apt update && sudo apt install -y git cmake build-essential
-```
-
-### 2. Clone and Build
-```bash
-git clone https://github.com/ggerganov/llama.cpp.git
-cd llama.cpp
-make
-```
-> For GPU support (NVIDIA):
+> **Linux users:** run the included setup script instead:
 > ```bash
-> make LLAMA_CUBLAS=1
+> chmod +x setup_ollama.sh && ./setup_ollama.sh
 > ```
 
-### 3. Download a Model
-```bash
-wget https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/resolve/main/llama-2-7b-chat.ggmlv3.q4_0.bin -O model.bin
-```
-
-### 4. Run the Model
-```bash
-./main -m model.bin -n 512 --repeat_penalty 1.0 -p "Your prompt here"
-```
-- `-n 512`: Generate up to 512 tokens.
-- `--repeat_penalty 1.0`: Adjust creativity (higher = more repetitive).
-
 ---
 
-## 📝 Notes & Tips
+## 🖥️ Without a USB — Run Ollama Locally
 
-### Model Recommendations
-| Size       | Model Example       | RAM Required | Use Case               |
-|------------|---------------------|--------------|------------------------|
-| Tiny       | `phi`, `tinyllama`   | 2-4GB        | Testing, low-end PCs   |
-| Small      | `llama2:7b`         | 8GB+         | General use            |
-| Medium     | `mistral:7b`        | 8GB+         | Balanced performance   |
-| Large      | `llama2:13b`        | 16GB+        | High-end machines      |
+### Option 1: Native Install (Easiest)
 
-### Troubleshooting
-- **Out of Memory?**
-  Use a smaller model or enable swap:
-  ```bash
-  sudo fallocate -l 8G /swapfile
-  sudo chmod 600 /swapfile
-  sudo mkswap /swapfile
-  sudo swapon /swapfile
-  ```
-
-- **GPU Not Detected?**
-  Install NVIDIA drivers:
-  ```bash
-  sudo ubuntu-drivers autoinstall
-  sudo reboot
-  ```
-
-- **Slow Performance?**
-  Use a smaller model or enable GPU acceleration.
-
----
-### 🎯 Quick Start for USBunny Users
-If you're using a **USBunny** drive, run the included setup script:
 ```bash
-chmod +x setup_ollama.sh
-./setup_ollama.sh
-```
-Then start chatting:
-```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama serve
+ollama pull llama2   # swap in mistral, phi, etc.
 ollama run llama2
 ```
 
+> **GPU support:** Ollama automatically uses your NVIDIA GPU if available.
+
+### Option 2: Docker (Isolated)
+
+```bash
+# Install Docker (Linux)
+sudo apt update && sudo apt install -y docker.io
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER && newgrp docker
+
+# Run Ollama
+docker run -d --gpus all -v ollama_data:/root/.ollama -p 11434:11434 ollama/ollama
+```
+
+- `--gpus all` — enable GPU (remove if no GPU)
+- `-v ollama_data:/root/.ollama` — persist models on your machine
+- `-p 11434:11434` — expose the Ollama API port
+
+Pull and run a model inside the container:
+```bash
+docker exec -it $(docker ps -q) ollama pull llama2
+docker exec -it $(docker ps -q) ollama run llama2
+```
+
+### Option 3: llama.cpp (Advanced)
+
+Full control over models and quantization.
+
+```bash
+sudo apt update && sudo apt install -y git cmake build-essential
+git clone https://github.com/ggerganov/llama.cpp.git
+cd llama.cpp
+make                  # add LLAMA_CUBLAS=1 for NVIDIA GPU support
+```
+
+Download and run a model:
+```bash
+wget https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/resolve/main/llama-2-7b-chat.ggmlv3.q4_0.bin -O model.bin
+./main -m model.bin -n 512 --repeat_penalty 1.0 -p "Your prompt here"
+```
+
+> No GPU? Check out [BitNet.cpp](https://github.com/microsoft/BitNet) for CPU-optimized inference.
+
+---
+
+## 📊 Model Reference
+
+The more RAM you have, the larger the model you can run. USBunny auto-selects based on your hardware.
+
+| RAM | Max Parameters (4-bit) | Example Models |
+| :--- | :--- | :--- |
+| 0 – 4 GB | < 1B | Phi-2, Qwen-0.5B, TinyLlama |
+| 8 GB | 3B | Llama 3.2 3B, Phi-3.5 Mini |
+| 16 GB | 8B | Llama 3.1 8B, Mistral 7B |
+| 24 GB | 14B | Qwen 2.5 14B, Mistral NeMo 12B |
+| 32 GB | 27B – 32B | Gemma 2 27B, Qwen 2.5 32B |
+| 48 GB | 40B – 50B | Mixtral 8x7B, Command R 35B |
+| 64 GB+ | 70B+ | Llama 3.3 70B, Qwen 2.5 72B |
+
+---
+
+## 🔧 Troubleshooting
+
+**Out of memory?** Use a smaller model, or add swap space:
+```bash
+sudo fallocate -l 8G /swapfile && sudo chmod 600 /swapfile
+sudo mkswap /swapfile && sudo swapon /swapfile
+```
+
+**GPU not detected?** Install NVIDIA drivers:
+```bash
+sudo ubuntu-drivers autoinstall && sudo reboot
+```
+
+**Slow performance?** Try a smaller model or enable GPU acceleration.
+
+---
+
+*Your conversation stays on your machine.*
