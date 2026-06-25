@@ -11,7 +11,7 @@
 - **🔒 Data Sovereignty** — Your weights, your drives, your data. No cloud harvesting.
 - **🚫 Uncensored by Design** — No corporate safety-washing. Raw compute for distinct narratives.
 - **🖥️ Hardware Agnostic** — Works on Windows, Mac, and Linux, across high and low RAM machines.
-
+- **ENJOY** Whhat little time you have left on this earth, and try not to take everything seriously.
 ---
 
 ## 🚀 Quick Start (With USB)
@@ -31,13 +31,64 @@ USBunny will automatically diagnose your machine and select a suitable model.
 
 ## 🖥️ Without a USB — Run Ollama Locally
 
-### Option 1: Native Install (Easiest)
+### WINDOWS Option 1: Native Install (Easiest)
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama serve
+
+ollama run everythinglm
+ollama run everythinglm
+```
+
+| xo |
+### WINDOWS USERS |
+  Ive taken the time to compile an exhaustive powershell diagnosis and repair script for you.
+  ive tested its efficacy and im quite pleased.
+  written for a RedPanda friend of mine, it will also serrrrrrrrrrrrrrrve you, should you 
+  have concerns regarding your windows OS. 
+  ### Dont forget to **right click** and __run as Administrator__
+
+
+#for extra schizten giggles
 
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ollama serve
-ollama pull llama2   # swap in mistral, phi, etc.
-ollama run llama2
+ollama pull UncensoredAi/diddy
+ollama run UncensoredAi/diddy
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#or simply summon
+
+```bash
+ollama run UncensoredAi/diddy
+```
+
+#swap in llama2-uncensored , mistral, phi, etc.
+
+
+
+
+
+```bash
+ollama signin
+ollama run everythinglm
 ```
 
 > **GPU support:** Ollama automatically uses your NVIDIA GPU if available.
@@ -58,7 +109,7 @@ docker run -d --gpus all -v ollama_data:/root/.ollama -p 11434:11434 ollama/olla
 - `-v ollama_data:/root/.ollama` — persist models on your machine
 - `-p 11434:11434` — expose the Ollama API port
 
-Pull and run a model inside the container:
+|||||||Pull and run a model inside the container: |
 ```bash
 docker exec -it $(docker ps -q) ollama pull llama2
 docker exec -it $(docker ps -q) ollama run llama2
