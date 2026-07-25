@@ -1,4 +1,5 @@
 # 🐇🔌 USBunny — AI On A Stick
+https://github.com/softbitestudio/usbunny
 
 *"Raw. Local. Unfiltered."*
 
