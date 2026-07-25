@@ -1,8 +1,8 @@
-# 🐇🔌 USBunny — AI hopping from PC to PC 
+# 🐇🔌 USBunny — AI On A Stick
 
 *"Raw. Local. Unfiltered."*
 
-**USBunny** turns any USB drive into a portable, private AI workstation. Plug it in, run it, and transform any computer into an **uncensored, agentic powerhouse**—no cloud, no tracking, no restrictions.
+**USBunny** is your locally-sourced, farm-to-USB AI experience. 🥕 Plug in your USB 3.0+ drive, right-click `start-(your_OS)`, and hop to it with **"Run as Administrator."** Choose your model and enjoy private, uncensored AI... on a stick. Bonus: Windows admin repair tool included for when your warren needs maintenance.
 
 ---
 
@@ -143,17 +143,25 @@ This script was originally created for a RedPanda friend—now it's here to serv
 ### Common Issues & Fixes
 
 **💥 Out of Memory?**
-Use a smaller model or add swap space:
-```bash
-sudo fallocate -l 8G /swapfile && sudo chmod 600 /swapfile
-sudo mkswap /swapfile && sudo swapon /swapfile
-```
+Use a smaller model, or add swap space:
+
+- **Linux:**
+  ```bash
+  sudo fallocate -l 8G /swapfile && sudo chmod 600 /swapfile
+  sudo mkswap /swapfile && sudo swapon /swapfile
+  ```
+- **Windows:** Create a page file in System Properties > Advanced > Performance Settings > Advanced > Virtual Memory
+- **macOS:** Use Disk Utility to create a swap partition
 
 **🖥️ GPU Not Detected?**
-Install NVIDIA drivers:
-```bash
-sudo ubuntu-drivers autoinstall && sudo reboot
-```
+Install the latest drivers for your GPU:
+
+- **Linux:**
+  ```bash
+  sudo ubuntu-drivers autoinstall && sudo reboot
+  ```
+- **Windows:** Download from [NVIDIA](https://www.nvidia.com/Download/index.aspx) or [AMD](https://www.amd.com/support)
+- **macOS:** Use Apple's built-in Metal support (M1/M2 chips work great!)
 
 **🐢 Slow Performance?**
 - Try a smaller model
