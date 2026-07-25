@@ -1,4 +1,4 @@
-# 🐇🔌 USBunny — AI On A Stick
+# 🐇🔌 USBunny — AI hopping from PC to PC 
 
 *"Raw. Local. Unfiltered."*
 
