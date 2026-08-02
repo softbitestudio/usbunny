@@ -1,0 +1,8 @@
+
+    conda-forge dependencies:
+    python=3.10
+    pip
+    flake8
+    pytest
+    pip:
+        some-pip-only-package==1.2.3
