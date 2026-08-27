@@ -49,13 +49,13 @@ The easiest way to get started:
 USBunny will automatically detect your hardware and select the best model for your machine.
 
 
-> **Linux users:** Run the setup script instead:
+ **Linux users:** Run the setup script instead:
 
-> ```bash
+ ```bash
 
-> chmod +x setup_ollama.sh && ./setup_ollama.sh
+ chmod +x setup_ollama.sh && ./setup_ollama.sh
 
-> ```
+```
 
 
 ---
