@@ -1,11 +1,3 @@
- Conversation with Gemini
-
-this readme.md is outta whack. plz replace diddy ai with inkling. look over the code and verify integrity.
-
-
-now, is it really necessary to include ollama instructions when the repository code is supposed to handle that for the user? redundant.
-
-
 # 🐇🔌 USBunny — AI On A Stick
 
 
