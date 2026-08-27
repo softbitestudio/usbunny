@@ -22,14 +22,14 @@ The easiest way to get started:
 
     Open the drive folder
 
-    Right-click start-(your_OS) and Run as Administrator
+    ***Right-click start-(`your_OS`) and Run as Administrator***
 
 USBunny will automatically detect your hardware and select the best model for your machine.
 
-    Linux users: Run the setup script instead:
-    Bash
+>[!IMPORTANT]    
+> Linux users: Run the setup script instead:
 
-   ```bash
+```bash
  chmod +x setup_ollama.sh && ./setup_ollama.sh
 ```
 
@@ -39,14 +39,14 @@ If the automated USB script encounters an error on your system, you can set thin
 Option 1: Native Ollama Install (Easiest)
 
 Windows/macOS/Linux:
-Bash
-
+```Bash
 curl -fsSL https://ollama.com/install.sh | sh
+```
 
 (Note: The install script starts Ollama automatically in the background. If you need to run it manually, use ollama serve)
 
 Then pull and run a model:
-Bash
+```Bash
 
 # For a balanced, uncensored experience
 ollama run everythinglm
@@ -59,11 +59,13 @@ ollama run UncensoredAi/inkling
 ollama run llama3
 ollama run mistral
 ollama run phi3
+```
 
-Option 2: Docker (Isolated Environment)
+# Option 2: Docker (Isolated Environment)
 
 Perfect for keeping your system clean:
-Bash
+
+```Bash
 
 # Install Docker (Linux example)
 sudo apt update && sudo apt install -y docker.io
@@ -72,6 +74,7 @@ sudo usermod -aG docker $USER && newgrp docker
 
 # Run Ollama container
 docker run -d --gpus all --name usbunny-ollama -v ollama_data:/root/.ollama -p 11434:11434 ollama/ollama
+```
 
 Flags Explained:
 
@@ -86,10 +89,10 @@ Bash
 
 docker exec -it usbunny-ollama ollama run llama3
 
-Option 3: llama.cpp (Advanced Users)
+# Option 3: llama.cpp (Advanced Users)
 
 For full control over models and quantization:
-Bash
+```Bash
 
 # Install dependencies
 sudo apt update && sudo apt install -y git cmake build-essential
@@ -102,6 +105,7 @@ make                  # Add GGML_CUDA=1 for NVIDIA GPU acceleration
 # Download a modern GGUF model and run it
 wget https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q4_K_M.gguf -O model.gguf
 ./llama-cli -m model.gguf -n 512 --repeat_penalty 1.1 -p "Your prompt here"
+```
 
     No GPU? Check out BitNet.cpp for CPU-optimized inference.
 
@@ -120,9 +124,9 @@ RAM	Max Parameters (4-bit)	Recommended Models
 
 We've included a comprehensive PowerShell diagnosis and repair script for Windows users. It's been thoroughly tested and works like a charm.
 
-    ⚠️ Important: Right-click and Run as Administrator for full functionality.
+>[!Important] 
+> Right-click and Run as Administrator for full functionality.
 
-This script was originally created for a RedPanda friend—now it's here to serve you too!
 🔧 Troubleshooting
 Common Issues & Fixes
 
@@ -130,10 +134,11 @@ Common Issues & Fixes
 Use a smaller model, or add swap space:
 
     Linux:
-    Bash
+    ```Bash
 
     sudo fallocate -l 8G /swapfile && sudo chmod 600 /swapfile
     sudo mkswap /swapfile && sudo swapon /swapfile
+```
 
     Windows: Create a page file in System Properties > Advanced > Performance Settings > Advanced > Virtual Memory
 
@@ -143,15 +148,15 @@ Use a smaller model, or add swap space:
 Install the latest drivers for your GPU:
 
     Linux:
-    Bash
+    ```Bash
 
     sudo ubuntu-drivers autoinstall && sudo reboot
-
+```
     Windows: Download from NVIDIA or AMD
 
     macOS: Use Apple's built-in Metal support (M1/M2/M3 chips work natively)
 
-💬 Community & Support
+# 💬 Community & Support
 
 Your conversation stays on your machine. But if you need help:
 
@@ -159,11 +164,6 @@ Your conversation stays on your machine. But if you need help:
 
     Join the discussion in GitHub Discussions
 
-Would you like me to take a look at the actual setup_ollama.sh or Windows startup scripts to ensure they are handling those edge cases smoothly?
-
-wonderful! thank you bunches :3
-
-could i get the raw markdown? and could we hide the redundant instruction guide behind < summary >?
 
 (Note: The install script starts Ollama automatically in the background. If you need to run it manually, use ollama serve)
 
