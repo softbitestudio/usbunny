@@ -1,3 +1,7 @@
+
+>[!IMPORTANT]
+>this is still on progress but Android support will be available by September 20th, 2026
+
 Bunnyclaw-Android/
 ├── app/
 │   ├── src/
