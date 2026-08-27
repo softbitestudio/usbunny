@@ -2,7 +2,8 @@
 
 "Raw. Local. Unfiltered." :shipit:
 
-USBunny is your locally-sourced, farm-to-USB AI experience. 🥕 Plug in your USB 3.0+ drive, right-click start-(your_OS), and hop to it with "Run as Administrator." Choose your model and enjoy private, uncensored AI... on a stick. Bonus: Windows admin repair tool included for when your warren needs maintenance.
+>[!NOTE]
+> USBunny is your locally-sourced, farm-to-USB AI experience. 🥕 Plug in your USB 3.0+ drive, right-click start-(your_OS), and hop to it with "Run as Administrator." Choose your model and enjoy private, uncensored AI... on a stick. Bonus: Windows admin repair tool included for when your warren needs maintenance.
 ✨ Why USBunny?
 
     🔒 Your Data, Your Rules — Models and conversations stay on your drive. No cloud harvesting, ever.
