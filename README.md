@@ -163,66 +163,7 @@ Your conversation stays on your machine. But if you need help:
     Check the GitHub Issues
 
     Join the discussion in GitHub Discussions
-
-
-(Note: The install script starts Ollama automatically in the background. If you need to run it manually, use ollama serve)
-
-Then pull and run a model:
-Bash
-
-# For a balanced, uncensored experience
-ollama run everythinglm
-
-# Or try these popular uncensored models
-ollama pull UncensoredAi/inkling
-ollama run UncensoredAi/inkling
-
-# Swap in any model you like
-ollama run llama3
-ollama run mistral
-ollama run phi3
-
-Option 2: Docker (Isolated Environment)
-
-Perfect for keeping your system clean:
-Bash
-
-# Install Docker (Linux example)
-sudo apt update && sudo apt install -y docker.io
-sudo systemctl enable --now docker
-sudo usermod -aG docker $USER && newgrp docker
-
-# Run Ollama container
-docker run -d --gpus all --name usbunny-ollama -v ollama_data:/root/.ollama -p 11434:11434 ollama/ollama
-
-Flags Explained:
-
-    --gpus all — Enable GPU acceleration (Requires NVIDIA Container Toolkit installed on host)
-
-    --name usbunny-ollama — Names the container for easy management
-
-    -v ollama_data:/root/.ollama — Persist models on your machine
-
-To use models in the container:
-Bash
-
-docker exec -it usbunny-ollama ollama run llama3
-
-Option 3: llama.cpp (Advanced Users)
-
-For full control over models and quantization:
-Bash
-
-# Install dependencies
-sudo apt update && sudo apt install -y git cmake build-essential
-
-# Clone and build
-git clone [https://github.com/ggerganov/llama.cpp.git](https://github.com/ggerganov/llama.cpp.git)
-cd llama.cpp
-make                  # Add GGML_CUDA=1 for NVIDIA GPU acceleration
-
-# Download a modern GGUF model and run it
-wget [https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q4_K_M.gguf](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q4_K_M.gguf) -O model.gguf
+huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q4_K_M.gguf) -O model.gguf
 ./llama-cli -m model.gguf -n 512 --repeat_penalty 1.1 -p "Your prompt here"
 
     No GPU? Check out BitNet.cpp for CPU-optimized inference.
